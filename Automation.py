@@ -13,9 +13,9 @@ clr.AddReference('Silencer')
 from Silencer import Automation as AutomationCs, Types
 
 class MouseButton(IntEnum):
-    LEFT = 0x0001
-    RIGHT = 0x0002
-    MIDDLE = 0x0010
+    LEFT = 0
+    MIDDLE = 1
+    RIGHT = 2
 
 class Automation:
     """Contains Silencer's Automation class functions."""
