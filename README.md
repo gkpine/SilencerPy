@@ -1,4 +1,4 @@
 # SilencerPy
- Python wrapper for Silencer.
+Python wrapper for Silencer.
 
-Silencer is not currently included with SilencerPy. A download link will be provided once both Silencer and SilencerPy are ready for a public release.
+The latest version of Silencer as of June 28th 2022 is included with this wrapper. The Python code is commented pretty heavily which is what can be used as documentation for now. Something more substantial will be available soon.
