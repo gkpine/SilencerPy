@@ -10,7 +10,7 @@ set_runtime(rtconfig)
 import clr
 from System import IntPtr
 clr.AddReference('Silencer')
-from Silencer import Automation as AutomationCs, Types
+from Silencer import Automation as AutomationCs
 
 class MouseButton(IntEnum):
     LEFT = 0
@@ -28,13 +28,16 @@ class Automation:
         Test function for debugging.
         a (int)
         b (int)
+
+        Returns:
+            int: Returns a + b
         """
         return AutomationCs.TestAdd(a, b)
 
     def silent_type(self, hwnd: int, text: str, send_enter: bool, human_type_low: int = None, human_type_high: int = None):
         """
         Silently types a message to the window specified by the hwnd.
-        hwnd (int): window handle, must be in hex format
+        hwnd (int): window handle, must be in hex format (you can use the Python function hex(...) for this)
         text (string): the message to send
         send_enter (boolean): True will send a new line after the message, False does not
         human_type_low (int, optional): lowerbound for random typing like a human
@@ -46,16 +49,23 @@ class Automation:
     def silent_move_mouse(self, hwnd: int, start_x: int, start_y: int, dest_x: int, dest_y: int, step: int = 1):
         """
         Silently move the mouse to the given coordinate within a certain number of steps.
-        hwnd(int): window handle, must be in hex format
-        start_x(int): X coordinate where the mouse will start from
-        start_y(int): Y coordinate where the mouse will start from
-        dest_x(int): X coordinate where the mouse is going
-        dest_y(int): Y coordinate where the mouse is going
-        step(int, optional): how many steps to do the movement in (1 is teleporting the mouse, something like 200 moves the mouse smoothly)
+        hwnd (int): window handle, must be in hex format (you can use the Python function hex(...) for this)
+        start_x (int): X coordinate where the mouse will start from
+        start_y (int): Y coordinate where the mouse will start from
+        dest_x (int): X coordinate where the mouse is going
+        dest_y (int): Y coordinate where the mouse is going
+        step (int, optional): how many steps to do the movement in (1 is teleporting the mouse, something like 200 moves the mouse smoothly)
         """
         hwnd_ptr = IntPtr.__overloads__[int](hwnd)
         AutomationCs.SilentMoveMouse(hwnd_ptr, start_x, start_y, dest_x, dest_y, step)
 
     def silent_click(self, hwnd: int, x: int, y: int, button: MouseButton):
+        """
+        Silently click the mouse at the given point using the given mouse button.
+        hwnd (int): window handle, must be in hex format (you can use the Python function hex(...) for this)
+        x (int): Click at this X coordinate.
+        y (int): Click at this Y coordinate.
+        button (MouseButton): The mouse button to use. The MouseButton object is just an enum (LEFT, MIDDLE, RIGHT).
+        """
         hwnd_ptr = IntPtr.__overloads__[int](hwnd)
         AutomationCs.SilentClick(hwnd_ptr, x, y, button.value)
